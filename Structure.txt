@@ -1,13 +1,13 @@
 note_ninja/
 │
 ├── app/
-│   ├── __init__.py
-│   ├── routes.py
-│   ├── static/
-│   ├── templates/
-│   │   └── index.html  # We'll modify this for the frontend
-│   └── utils.py        # You can create this for utility functions like transcription
+│   ├── __init__.py       # Initializes the Flask app and SocketIO instance.
+│   ├── routes.py         # Contains the route definitions and WebSocket logic for audio processing.
+│   ├── static/           # Folder for static files (e.g., CSS, JS, images).
+│   ├── templates/        # Folder for HTML templates (e.g., the frontend view for the app).
+│   │   └── index.html    # HTML file that will have the frontend UI for the transcription & summary.
+│   └── utils.py          # Contains utility functions like Whisper transcription and Groq summarization.
 │
-├── venv/                # Virtual environment folder
-├── requirements.txt     # Make sure all your dependencies are listed here
-└── run.py               # Main entry point for your Flask app
+├── venv/                 # Virtual environment folder (created during setup).
+├── requirements.txt      # File listing all required Python dependencies.
+└── run.py                # Main entry point for running the Flask app.

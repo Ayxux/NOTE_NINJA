@@ -72,7 +72,7 @@ Response: JSON with transcription & summary
     "summary": "- Key points\n- Action items\n- Questions raised..."
 }
 ```
-🚀 Deployment
+🚀 Deployment!
 
 1️⃣ Deploy Backend to Render
 

@@ -1,0 +1,6 @@
+/note-ninja
+├── backend/  (Flask API for audio processing)
+├── frontend/ (Streamlit UI)
+├── models/   (Any local models we download)
+├── data/     (Sample test files)
+├── main.py   (For running the full pipeline)

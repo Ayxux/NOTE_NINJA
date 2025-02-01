@@ -1,89 +1,102 @@
 # NOTE_NINJA
 
-Overview
+## Live Audio Transcription and Summarization API
+## Overview
+This application provides two primary functionalities:
 
-Note Ninja is an AI-powered meeting assistant that transcribes and summarizes meeting audio in real-time. It leverages Whisper AI for transcription and LLMs (Groq-Mistral/GPT-4-Turbo) for generating structured summaries.
+Live Audio Transcription: Real-time speech-to-text conversion with continuous transcription displayed on the frontend.
+Audio File Upload and Summarization: Users can upload audio files, which will be transcribed and summarized.
+Both processes are handled by a Flask backend and use Whisper for transcription and Groq-Mistral for text summarization.
 
-🚀 Key Features:
+## Features
+Live Audio Transcription: Captures audio from the microphone and transcribes it in real-time.
+Text Summarization: Once transcription is complete, the text is sent to the Groq-Mistral LLM to generate structured summaries, including bullet points, timestamps, key topics, and action items.
+Audio File Upload: Upload audio files (in formats like .mp3, .wav, .m4a) for transcription and summarization.
+Real-time UI Updates: Transcripts are displayed live in the frontend as they are generated.
+Downloadable Summary: Option for users to download the summarized text as a .txt file.
 
-Automatic Transcription: Converts speech to text with high accuracy.
+## Technologies
+Backend: Flask
+Real-time Transcription: Whisper (by OpenAI)
+Summarization: Groq-Mistral LLM
+Frontend: HTML + JavaScript (with Flask-SocketIO for live updates)
+Audio Handling: PyAudio (for real-time microphone input)
 
-Concise Summaries: Extracts key takeaways, action points, and timestamps.
-
-Fast & Efficient: Processes audio in seconds.
-
-User-Friendly UI: Simple interface for uploading audio and viewing summaries.
-
-Deployed & Ready to Use: Works via a web app.
-
-⚙️ Tech Stack
-
-Backend: Flask (Python), OpenAI Whisper, Groq-Mistral/GPT-4-Turbo
-
-Frontend: Streamlit
-
-Deployment: Render (Backend), Streamlit Cloud (Frontend)
-
-🚀 Quick Start
-
-1️⃣ Clone the Repository
+## Setup Instructions
+Step 1: Clone the Repository
 ```
-git clone https://github.com/your-username/note-ninja.git
-cd note-ninja
+git clone https://github.com/Ayxux/NOTE_NINJA.git
+cd NOTE_NINJA
 ```
-2️⃣ Install Dependencies
+Step 2: Install Dependencies
+Create a virtual environment (optional but recommended):
+```
+python -m venv venv
+source venv/bin/activate  # On Windows use venv\Scripts\activate
+```
+Install the required libraries:
 ```
 pip install -r requirements.txt
 ```
-3️⃣ Run the Backend API (Flask)
+
+Step 3: Run the Flask Application
+To start the Flask app with real-time audio transcription:
 ```
-cd backend
 python app.py
 ```
-4️⃣ Run the Frontend (Streamlit)
+
+Step 4: Open the Application
+Once the Flask server is running, navigate to:
 ```
-cd frontend
-streamlit run app.py
+http://127.0.0.1:5000
 ```
-🔥 Usage
+## Functionality
+1. Live Audio Transcription
+When you visit the webpage, the app will continuously listen to the microphone input.
+The transcription will be displayed on the screen as text, updating in real-time.
+The transcribed text will also be sent to the backend for summarization once sufficient content is captured.
+2. Audio File Upload
+Users can upload audio files for transcription and summarization by selecting the file input.
+Supported file types: .mp3, .wav, .m4a
+The audio is processed by Whisper for transcription and then summarized by Groq-Mistral.
+3. Summarization Output
+The application will provide the following output after transcription:
 
-Upload a meeting audio file (.mp3, .wav, .m4a).
+### Bullet Points: Key points summarized from the transcript.
+### Timestamps: Time references from the transcript.
+### Key Topics: Identified important topics discussed.
+### Action Items: Any actionable tasks mentioned in the conversation.
 
-Wait for transcription & summary generation.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-View structured notes with timestamps & action items.
-
-Download summary as a text file.
-
-🎯 API Endpoints
-
-1️⃣ Upload Audio & Get Summary
-
-Endpoint: /transcribe
-
+# API Endpoints
+## 1. /upload_audio
 Method: POST
-
-Payload: multipart/form-data (audio file)
-
-Response: JSON with transcription & summary
+Description: Allows the user to upload an audio file for transcription and summarization.
+Request Body: Multipart form data with file field for the audio file.
+Response: Returns a JSON with the summarized content, including bullet points, timestamps, and action items.
+Example request (using curl):
+```
+curl -X POST -F "file=@path/to/audio.mp3" http://127.0.0.1:5000/upload_audio
+```
+Example response:
 ```
 {
-    "transcription": "Full text of the meeting...",
-    "summary": "- Key points\n- Action items\n- Questions raised..."
+  "summary": "Meeting Summary",
+  "bullet_points": ["Point 1", "Point 2"],
+  "timestamps": ["00:01", "02:34"],
+  "action_items": ["Task 1", "Task 2"]
 }
 ```
-🚀 Deployment!
+## 2. / (Live Transcription)
+Method: GET
+Description: Serves the UI where users can interact with the live transcription feature.
+Response: Returns a live updated transcript via WebSocket.
+Known Issues
+The live transcription may have occasional delays depending on network conditions.
+Currently, the transcription model (Whisper) works best for English and may have limited accuracy in other languages.
 
-1️⃣ Deploy Backend to Render
-
-Create a Render account.
-
-Deploy Flask API as a web service.
-
-2️⃣ Deploy Frontend to Streamlit Cloud
-
-Push the repo to GitHub.
-
-Connect GitHub to Streamlit Cloud.
-
-Deploy and share the link.
+## Future Improvements
+Multilingual Support: Implement support for additional languages in transcription.
+Enhanced Summarization: Add advanced summarization techniques, such as topic clustering.
+Save Transcript: Provide functionality to save and download the full transcription before summarization.

@@ -1,6 +1,13 @@
-/note-ninja
-├── backend/  (Flask API for audio processing)
-├── frontend/ (Streamlit UI)
-├── models/   (Any local models we download)
-├── data/     (Sample test files)
-├── main.py   (For running the full pipeline)
+note_ninja/
+│
+├── app/
+│   ├── __init__.py
+│   ├── routes.py
+│   ├── static/
+│   ├── templates/
+│   │   └── index.html  # We'll modify this for the frontend
+│   └── utils.py        # You can create this for utility functions like transcription
+│
+├── venv/                # Virtual environment folder
+├── requirements.txt     # Make sure all your dependencies are listed here
+└── run.py               # Main entry point for your Flask app

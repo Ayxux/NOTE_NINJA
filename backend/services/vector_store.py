@@ -11,7 +11,10 @@ class VectorStore:
         self.metadata = []
 
     def add_document(self, text: str, metadata: dict):
-        embeddings = self.embedder.encode([text])
+        try:
+            embeddings = self.embedder.encode([text])
+        except UnicodeDecodeError:
+            raise ValueError("Document encoding issue")
         self.index.add(np.array(embeddings, dtype=np.float32))
         self.documents.append(text)
         self.metadata.append(metadata)

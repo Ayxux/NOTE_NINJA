@@ -1,0 +1,10 @@
+basic backend architecture/logic
+
+services - 
+1. asr service calls groq distil large whisper v3 model returns the transcription
+2. rag service implements rag (vector store + llm) the vector store (stores the transcript using chromadb)
+3. vector_store ( storing the transcript using chromadb)
+4. summarizer.py for text input it gives summary 
+
+to do 
+creation routes and services and create api

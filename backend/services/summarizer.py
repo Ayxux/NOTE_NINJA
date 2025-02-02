@@ -8,4 +8,4 @@ def summarize_text(text: str) -> str:
         messages=[{"role": "user", "content": f"Summarize this:\n{text}"}],
         model="mixtral-8x7b-32768"
     )
-    return response.choices[0].message.content
+    return response.choices[0].message.content 

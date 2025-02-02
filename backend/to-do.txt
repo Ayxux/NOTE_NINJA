@@ -8,3 +8,24 @@ services -
 
 to do 
 creation routes and services and create api
+
+API Documentation:
+1. POST /transcribe
+   - Description: Transcribes the uploaded audio file.
+   - Request: UploadFile (audio file)
+   - Response: JSON with the transcription.
+
+2. POST /summarize
+   - Description: Summarizes the uploaded text file.
+   - Request: UploadFile (text file)
+   - Response: JSON with the summary.
+
+3. POST /ask
+   - Description: Answers a question based on the provided transcript.
+   - Request: JSON with 'question' and 'transcript' fields.
+   - Response: JSON with the answer.
+
+4. WebSocket /ws
+   - Description: Handles real-time transcription of audio chunks sent over WebSocket.
+   - Request: Audio bytes sent over WebSocket.
+   - Response: Partial transcriptions sent over WebSocket.

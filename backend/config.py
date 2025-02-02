@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     GROQ_API_KEY: str = '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'

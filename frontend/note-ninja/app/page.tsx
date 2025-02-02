@@ -1,23 +1,32 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/app/components/ui/button"
+import { Card } from "@/app/components/ui/card"
+import { Textarea } from "@/app/components/ui/textarea"
 import { FileAudio, FileText, Wand2 } from "lucide-react"
-import AudioRecorder from "@/components/Audio/AudioRecorder"
-import AudioVisualizer from "@/components/Audio/AudioVisualizer"
-import { useWebSocketClient } from "@/hooks/useWebSocketClient"
+import AudioRecorder from "@/app/components/Audio/AudioRecorder"
+import AudioVisualizer from "@/app/components/Audio/AudioVisualizer"
+import useWebSocketClient from "@/app/hooks/useWebSocketClient"
 
 export default function NotePage() {
   const [transcription, setTranscription] = useState("")
   const [audioData, setAudioData] = useState<Uint8Array | null>(null)
-  const { sendAudio } = useWebSocketClient("wss://your-websocket-url")  // Replace with your WebSocket URL
+  const webSocketClient = useWebSocketClient("ws://localhost:8000/ws")  // Replace with your WebSocket URL
+  const sendAudio = (data: Uint8Array) => {
+    if (webSocketClient) {
+      webSocketClient.send(data)
+    }
+  }
 
   const handleAudioData = (data: Uint8Array) => {
     setAudioData(data)
     sendAudio(data)
   }
+
+  useEffect(() => {
+    console.log('NotePage component mounted');
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">

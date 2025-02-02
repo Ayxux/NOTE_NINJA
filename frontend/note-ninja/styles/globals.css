@@ -95,3 +95,29 @@
     opacity: 0;
   }
 }
+
+.audio-recorder {
+  border: 1px solid red; /* Temporary border to ensure visibility */
+  padding: 10px;
+}
+
+.audio-controls-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.control-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.control-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icon {
+  margin-right: 5px;
+}

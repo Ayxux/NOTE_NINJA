@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Mic, StopCircle } from 'lucide-react';
+import React from 'react';
 
 interface AudioControlsProps {
   isRecording: boolean;

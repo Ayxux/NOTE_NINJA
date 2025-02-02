@@ -8,7 +8,10 @@ class RAGService:
         self.llm = Groq(api_key=settings.GROQ_API_KEY)
     
     def query(self, question: str) -> str:
-        results = self.vector_store.query(question, n_results=3)
+        try:
+            results = self.vector_store.query(question, n_results=3)
+        except UnicodeDecodeError:
+            raise ValueError("Query encoding issue")
         context = "\n".join(results["documents"])
         prompt = f"Answer using context:\n{context}\n\nQuestion: {question}"
         return self.llm.chat.completions.create(...)
